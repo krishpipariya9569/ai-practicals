@@ -1,0 +1,22 @@
+def laptop_expert(turns_on, internet_works, is_slow):
+    if turns_on == "no":
+        return "Check the charger and power cable."
+
+    elif internet_works == "no":
+        return "Check Wi-Fi and restart the router."
+
+    elif is_slow == "yes":
+        return "Close unused programs and restart the laptop."
+
+    else:
+        return "No common problem was found by this expert system."
+
+
+        turns_on = input("Does the laptop turn on? yes/no: ").lower()
+internet_works = input("Does the internet work? yes/no: ").lower()
+is_slow = input("Is the laptop slow? yes/no: ").lower()
+
+advice = laptop_expert(turns_on, internet_works, is_slow)
+
+print("\nExpert System Advice:")
+print(advice)
