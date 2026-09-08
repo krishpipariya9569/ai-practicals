@@ -1,0 +1,80 @@
+map_rooms ={
+    "A":["B","C"],
+    "B":["D"],
+    "C":["D"],
+    "D":["G"],
+    "G":[]
+}
+
+
+
+def bfs(Start,goal):
+  to_do=[Start]
+  visited=[]
+  order=[]
+
+  while to_do:
+    room = to_do.pop(0)
+
+    if room in visited:
+      continue
+    visited.append(room)
+    order.append(room)
+
+    if room == goal:
+      return order
+
+    for nxt in map_rooms[room]:
+      to_do.append(nxt)
+  return order
+
+order=bfs("A","G")
+print("The order in which the room is visited",order)
+print("The number of rooms BFS visited",len(order))
+
+
+def dfs(Start,goal):
+  to_do=[Start]
+  visited=[]
+  order=[]
+
+  while to_do:
+    room = to_do.pop()
+
+    if room in visited:
+      continue
+    visited.append(room)
+    order.append(room)
+
+    if room == goal:
+      return order
+
+    for nxt in map_rooms[room]:
+      to_do.append(nxt)
+  return order
+
+order=bfs("A","G")
+print("The order in which the room is visited",order)
+print("The number of rooms DFS visited",len(order))
+
+
+door_cost = {
+    ("A","B"):1,
+    ("A","C"):1,
+    ("B","D"):1,
+    ("C","D"):1,
+    ("D","G"):1
+}
+
+def path_cost(path):
+  total = 0
+  for i in range(len(path)-1):
+    door = (path[i],path[i+1])
+    total = total + door_cost[door]
+  return total
+
+path1 = ["A","B","D","G"]
+path2 = ["A","C","D","G"]
+
+print("Path 1 A-> B -> D -> G",path_cost(path1))
+print("Path 2 A-> C -> D -> G",path_cost(path2))
